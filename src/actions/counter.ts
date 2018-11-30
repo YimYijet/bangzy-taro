@@ -15,7 +15,7 @@ export const minus = () => {
 }
 
 // 异步的action
-export function asyncAdd () {
+export function asyncAdd (): any {
   return dispatch => {
     setTimeout(() => {
       dispatch(add())
