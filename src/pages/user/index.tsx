@@ -1,6 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, ScrollView, Text } from '@tarojs/components'
+import { AtButton } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
 // import TabBar from '../../components/TabBar'
@@ -43,7 +44,7 @@ class User extends Component {
     render() {
         return (
             <ScrollView>
-                <Text >aaa</Text>
+                <AtButton >aaa</AtButton>
             </ScrollView>
         )
     }
