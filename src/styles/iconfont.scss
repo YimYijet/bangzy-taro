@@ -1,18 +1,17 @@
 @font-face {
-    font-family: 'iconfont';  /* project id 879336 */
-    src: url('//at.alicdn.com/t/font_879336_cj9kojt4ve.eot');
-    src: url('//at.alicdn.com/t/font_879336_cj9kojt4ve.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_879336_cj9kojt4ve.woff') format('woff'),
-    url('//at.alicdn.com/t/font_879336_cj9kojt4ve.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_879336_cj9kojt4ve.svg#iconfont') format('svg');
-  }
+  font-family: 'iconfont';  /* project id 879336 */
+  src: url('//at.alicdn.com/t/font_879336_dydf0ik592r.eot');
+  src: url('//at.alicdn.com/t/font_879336_dydf0ik592r.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_879336_dydf0ik592r.woff') format('woff'),
+  url('//at.alicdn.com/t/font_879336_dydf0ik592r.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_879336_dydf0ik592r.svg#iconfont') format('svg');
+}
   
-  .iconfont {
+  .icon {
     font-family: "iconfont" !important;
     font-size: 42rpx;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;
     vertical-align: middle;
     height: 72rpx;
@@ -20,6 +19,8 @@
   }
   
   .icon-info-circle:before { content: "\e77e"; }
+
+  .icon-YUAN:before { content: "\e785"; }
   
   .icon-message:before { content: "\e78a"; }
   
@@ -33,18 +34,30 @@
   
   .icon-location:before { content: "\e790"; }
   
+  .icon-wallet:before { content: "\e798"; }
+  
   .icon-container:before { content: "\e7b0"; }
   
   .icon-redenvelope:before { content: "\e7b2"; }
   
+  .icon-solution:before { content: "\e7b5"; }
+  
   .icon-like:before { content: "\e7c8"; }
   
   .icon-unlike:before { content: "\e7c9"; }
+  
+  .icon-calendar-check:before { content: "\e7d3"; }
+  
+  .icon-idcard:before { content: "\e7de"; }
   
   .icon-monitor:before { content: "\e7e2"; }
   
   .icon-right:before { content: "\e7eb"; }
   
   .icon-gift:before { content: "\e842"; }
+  
+  .icon-wechat-fill:before { content: "\e883"; }
+  
+  .icon-comment:before { content: "\e8e8"; }
   
   

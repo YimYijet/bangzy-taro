@@ -1,36 +1,42 @@
 @import "../../styles/iconfont.scss";
 
-.panel {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 20rpx 50rpx;
-  width: 100%;
-  color: #666;
+.tab-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 20rpx 50rpx;
+    width: 100%;
+    color: #666;
+
+    .cell {
+        display: flex;
+        flex-direction: row;
+        font-size: 32rpx;
+
+        &-text {
+            height: 72rpx;
+            line-height: 72rpx;
+        }
+
+        &-icon {
+            margin-right: 40rpx;
+        }
+    }
+
+    .msg-count {
+        color: #fff;
+        background: #ed3f14;
+        width: 68rpx;
+        height: 36rpx;
+        line-height: 36rpx;
+        font-size: 24rpx;
+        border-radius: 8rpx;
+        text-align: center;
+    }
 }
 
-.cell {
-  display: flex;
-  flex-direction: row;
-  font-size: 32rpx;
-  &-text {
-    height:72rpx;
-    line-height:72rpx;
-  }
-  &-icon {
-    margin-right: 40rpx;
-  }
-}
-
-.msg-count {
-  color: #fff;
-  background: #ed3f14;
-  width: 68rpx;
-  height: 36rpx;
-  line-height: 36rpx;
-  font-size: 24rpx;
-  border-radius: 8rpx;
-  text-align: center;
+.border {
+    border-bottom: 1px solid #eee;
 }

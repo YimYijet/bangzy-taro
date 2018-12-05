@@ -1,0 +1,31 @@
+.userInfo {
+    padding: 56rpx 0;
+    &-panel {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    &-cell {
+        display: flex;
+        flex-direction: row;
+    }
+    &-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin: 0 40rpx;
+        color: #353535;
+        font-size: 32rpx;
+    }
+    &-account {
+        color: #888;
+        font-size: 24rpx;
+    }
+}
+Page {
+    background: #eee;
+}

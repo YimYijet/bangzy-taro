@@ -2,20 +2,18 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import '@tarojs/async-await'
 import { Provider } from '@tarojs/redux'
 
-import Index from './pages/index'
-import User from './pages/user'
+// import Index from './pages/index'
+// import User from './pages/user'
 
 import configStore from './store'
 
 import { getAuth, getWechatInfo } from './actions/userInfo' 
 
 import './app.scss'
-
-if (process.env.TARO_ENV === 'weapp') {
-    require('taro-ui/dist/weapp/css/index.css')
-} else if (process.env.TARO_ENV === 'h5') {
-    require('taro-ui/dist/h5/css/index.css')
-}
+// 导入taro-ui flex样式
+import 'taro-ui/dist/weapp/css/index.css'
+// 引入自定义icon样式
+import './styles/iconfont.scss'
 
 const store = configStore()
 
@@ -28,10 +26,12 @@ class App extends Component {
      * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
      * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
      */
-    config: Config = {
+    public config: Config = {
         pages: [
             'pages/user/index',
-            'pages/index/index'
+            'pages/location/index',
+            'pages/discovery/index',
+            'pages/index/index',
         ],
         window: {
             backgroundTextStyle: 'light',
@@ -44,15 +44,15 @@ class App extends Component {
             color: '#888',
             selectedColor: '#353535',
             list: [
-            //   {
-            //     pagePath: 'pages/discovery/index',
-            //     text: '发现',
-            //     selectedIconPath: 'assets/icon/compass-fill.png',
-            //     iconPath: 'assets/icon/compass.png'
-            //   },
               {
-                pagePath: 'pages/index/index',
-                text: '位置',
+                pagePath: 'pages/discovery/index',
+                text: '发现',
+                selectedIconPath: 'assets/icon/compass-fill.png',
+                iconPath: 'assets/icon/compass.png'
+              },
+              {
+                pagePath: 'pages/location/index',
+                text: '附近',
                 selectedIconPath: 'assets/icon/location-fill.png',
                 iconPath: 'assets/icon/location.png'
               },
@@ -66,7 +66,7 @@ class App extends Component {
           },
     }
 
-    async componentWillMount() {
+    public async componentWillMount() {
         // 获取授权
         const auth = await Taro.getSetting()
         store.dispatch(getAuth(auth.authSetting))
@@ -77,19 +77,11 @@ class App extends Component {
         }
     }
 
-    componentDidMount() { }
-
-    componentDidShow() { }
-
-    componentDidHide() { }
-
-    componentCatchError() { }
-
-    render() {
+    public render() {
         return (
             <Provider store={store}>
-                <Index />
-                <User />
+                {/* <Index />
+                <User /> */}
             </Provider>
         )
     }

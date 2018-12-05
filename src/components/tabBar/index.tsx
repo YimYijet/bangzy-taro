@@ -1,7 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Navigator, Text, Icon } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { View, Navigator, Text } from '@tarojs/components'
 
 import './index.scss'
 
@@ -10,10 +9,11 @@ type PageStateProps = {}
 type PageDispatchProps = {}
 
 type PageOwnProps = {
-    icon: string
-    text: string
+    border?: boolean
+    icon?: string
+    text?: string
     link: string
-    msgCount: string
+    msgCount?: string
 }
 
 type PageState = {}
@@ -25,12 +25,15 @@ interface TabBar {
 }
 
 class TabBar extends Component {
+    static defaultProps = {
+        border: false,
+    }
     render() {
-        const { icon, text, link, msgCount } = this.props
+        const { border, icon, text, link, msgCount } = this.props
         return (
-            <Navigator url={link} className="panel">
+            <Navigator url={link} className={`tab-item ${border && 'border'}`}>
                 <View className="cell">
-                    <Icon className={`cell-icon iconfont icon-${icon}`} type="info"></Icon>
+                    <Text className={`cell-icon iconfont icon-${icon}`} ></Text>
                     <Text className="cell-text">{text}</Text>
                 </View>
                 {!!msgCount && <View className="msg-count">{msgCount}</View>}
