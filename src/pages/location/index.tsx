@@ -82,9 +82,23 @@ class User extends Component {
                     longitude={116.46} 
                     latitude={39.92}
                     markers={[{
-                        longitude: 116,
-                        latitude: 39,
-                        iconPath: locationPoint
+                        longitude: 116.46,
+                        latitude: 39.92,
+                        iconPath: locationPoint,
+                        width: 24,
+                        height: 24,
+                        callout: {
+                            content: '宿迁中学咨询点',
+                            color: '#353535',
+                            fontSize: 13,
+                            borderRadius: 9,
+                            borderWidth: 1,
+                            borderColor: '#e6e6e6',
+                            bgColor: '#fff',
+                            padding: 5,
+                            display: 'ALWAYS',
+                            textAlign: 'center'
+                        }
                     }]}
                 >
                 </Map>
