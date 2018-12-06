@@ -28,10 +28,11 @@ class App extends Component {
      */
     public config: Config = {
         pages: [
+            'pages/discovery/index',
             'pages/user/index',
             'pages/location/index',
-            'pages/discovery/index',
             'pages/index/index',
+            'pages/location/detail/index'
         ],
         window: {
             backgroundTextStyle: 'light',

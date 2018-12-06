@@ -1,0 +1,51 @@
+.detail {
+    padding-left: 36px;
+    padding-right: 36px;
+    width: unset;
+    &-wrap {
+        padding: 56px 32px;
+    }
+    &-title {
+        position: relative;
+        height: 80px;
+        font-size: 48px;
+        font-weight: 700;
+        color: #333;
+        &-decorate {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            display: inline-block;
+            width: 140px;
+            height: 2PX;
+            border-radius: 1PX;
+            background-color: #6190e8;
+        }
+    }
+    &-service {
+        &-on {
+            background: #1aad16!important;
+            color: #fff!important;
+        }
+        &-off {
+            background: #e45649!important;
+            color: #fff!important;
+        }
+    }
+    &-swiper {
+        height: 56vw;
+    }
+    &-phone {
+        padding:24rpx 0 0;
+        color: #999;
+        font-size: 32rpx;
+        vertical-align: middle;
+        text-align: center;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}

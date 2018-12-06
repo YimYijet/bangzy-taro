@@ -40,8 +40,8 @@ class User extends Component {
     }
     render() {
         return (
-            <View style={{backgroundColor: '#6cf'}}>
-
+            <View>
+                
                 <ScrollView style="height: 110vh;">这是新闻页</ScrollView>
             </View>
         )

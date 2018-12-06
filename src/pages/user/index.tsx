@@ -119,13 +119,13 @@ class User extends Component {
                             value: "comment",
                         }}
                     />
-                    <AtListItem
+                    {/* <AtListItem
                         title="关于"
                         iconInfo={{
                             prefixClass: 'icon',
                             value: "info-circle",
                         }}
-                    />
+                    /> */}
                 </AtList>
             </ScrollView>
         )

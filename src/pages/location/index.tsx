@@ -10,6 +10,8 @@ import './index.scss'
 
 import locationPoint from '../../assets/icon/location-point.png'
 
+import './detail/'
+
 type PageStateProps = {
 
 }
@@ -43,14 +45,14 @@ class User extends Component {
           navigationBarBackgroundColor: '#353535',
     }
 
+    public state: PageState = {
+        value: '',
+    }
+
     constructor(props) {
         super(props)
         this.onChange.bind(this)
         this.handleSearch.bind(this)
-    }
-
-    public state: PageState = {
-        value: ''
     }
 
     public handleSearch(e) {
@@ -63,7 +65,12 @@ class User extends Component {
         })
     }
 
-    
+    public handleTap(e) {
+        console.log('tap', e)
+        Taro.navigateTo({
+            url: './detail/index?title=宿迁中学咨询点'
+        })
+    }
 
     public render() {
         const { value } = this.state
@@ -79,9 +86,11 @@ class User extends Component {
                 </View>
                 <Map 
                     className="location-map" 
+                    show-compass
                     longitude={116.46} 
                     latitude={39.92}
                     markers={[{
+                        id: 0,
                         longitude: 116.46,
                         latitude: 39.92,
                         iconPath: locationPoint,
@@ -91,22 +100,18 @@ class User extends Component {
                             content: '宿迁中学咨询点',
                             color: '#353535',
                             fontSize: 13,
-                            borderRadius: 9,
+                            borderRadius: 16,
                             borderWidth: 1,
                             borderColor: '#e6e6e6',
                             bgColor: '#fff',
-                            padding: 5,
+                            padding: 9,
                             display: 'ALWAYS',
                             textAlign: 'center'
                         }
                     }]}
+                    onCalloutTap={this.handleTap.bind(this)}
                 >
                 </Map>
-                {/* <AtFloatLayout 
-                    title={}
-                    isOpened={}
-                    onClose={}>
-                </AtFloatLayout> */}
             </View>
         )
     }

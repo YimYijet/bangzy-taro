@@ -9,7 +9,7 @@ import { getUserInfo, getWechatInfo } from '../../../../actions/userInfo'
 import './index.scss'
 // 导入taro-ui flex样式
 import 'taro-ui/dist/weapp/css/index.css'
-import userInfo from '@/src/reducers/userInfo';
+import userInfo from '../../../../reducers/userInfo';
 
 type PageStateProps = {
     user: {
