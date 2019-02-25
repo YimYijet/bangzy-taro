@@ -120,10 +120,10 @@ class User extends Component {
                         }}
                     />
                     {/* <AtListItem
-                        title="关于"
+                        title="授权设置"
                         iconInfo={{
                             prefixClass: 'icon',
-                            value: "info-circle",
+                            value: "setting",
                         }}
                     /> */}
                 </AtList>

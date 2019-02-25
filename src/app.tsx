@@ -8,6 +8,7 @@ import { Provider } from '@tarojs/redux'
 import configStore from './store'
 
 import { getAuth, getWechatInfo } from './actions/userInfo' 
+import { getCurLocation } from './actions/location'
 
 import './app.scss'
 // 导入taro-ui flex样式
@@ -28,9 +29,9 @@ class App extends Component {
      */
     public config: Config = {
         pages: [
-            'pages/discovery/index',
-            'pages/user/index',
+            // 'pages/discovery/index',
             'pages/location/index',
+            'pages/user/index',
             'pages/index/index',
             'pages/location/detail/index'
         ],
@@ -45,26 +46,31 @@ class App extends Component {
             color: '#888',
             selectedColor: '#353535',
             list: [
-              {
-                pagePath: 'pages/discovery/index',
-                text: '发现',
-                selectedIconPath: 'assets/icon/compass-fill.png',
-                iconPath: 'assets/icon/compass.png'
-              },
-              {
-                pagePath: 'pages/location/index',
-                text: '附近',
-                selectedIconPath: 'assets/icon/location-fill.png',
-                iconPath: 'assets/icon/location.png'
-              },
-              {
-                pagePath: 'pages/user/index',
-                text: '我的',
-                selectedIconPath: 'assets/icon/smile-fill.png',
-                iconPath: 'assets/icon/smile.png'
-              }
+              // {
+              //   pagePath: 'pages/discovery/index',
+              //   text: '发现',
+              //   selectedIconPath: 'assets/icon/compass-fill.png',
+              //   iconPath: 'assets/icon/compass.png'
+              // },
+                {
+                    pagePath: 'pages/location/index',
+                    text: '附近',
+                    selectedIconPath: 'assets/icon/location-fill.png',
+                    iconPath: 'assets/icon/location.png'
+                },
+                {
+                    pagePath: 'pages/user/index',
+                    text: '我的',
+                    selectedIconPath: 'assets/icon/smile-fill.png',
+                    iconPath: 'assets/icon/smile.png'
+                }
             ]
-          },
+        },
+          permission: {
+            "scope.userLocation": {
+              desc: "需要获取您的地理位置，请确认授权"
+            }
+          }
     }
 
     public async componentWillMount() {
@@ -75,6 +81,15 @@ class App extends Component {
         if (auth.authSetting['scope.userInfo']) {
             const user = await Taro.getUserInfo()
             store.dispatch(getWechatInfo(user.userInfo))
+        }
+        if (auth.authSetting['scope.userLocation']) {
+            const location = await Taro.getLocation()
+            console.log(location)
+            store.dispatch(getCurLocation(location))
+        } else {
+            console.log(await Taro.openSetting({
+                scope: 'scope.userLocation'
+            }))
         }
     }
 

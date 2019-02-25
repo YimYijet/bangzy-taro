@@ -23,7 +23,7 @@ export default function(state = INITIAL_STATE, action) {
                 ...state,
                 authSetting: action.data.authSetting
             }
-       case LOG_IN:
+        case LOG_IN:
             return {
                 ...state,
                 code: action.data.code

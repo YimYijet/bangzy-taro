@@ -28,14 +28,14 @@ type PageState = {
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
-interface User {
+interface Location {
     props: IProps
 }
 
 @connect(() => ({}), (dispatch) => ({
 
 }))
-class User extends Component {
+class Location extends Component {
     public config: Config = {
         window: {
             backgroundColor: "#eee"
@@ -117,4 +117,4 @@ class User extends Component {
     }
 }
 
-export default User as ComponentClass<PageOwnProps, PageState>
+export default Location as ComponentClass<PageOwnProps, PageState>
