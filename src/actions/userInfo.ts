@@ -8,6 +8,7 @@ export interface IUserInfoAction {
     code?: number
 }
 
+// 获取用户授权
 export function getAuth(authSetting: object): IUserInfoAction {
     return {
         type: GET_AUTH,
@@ -17,6 +18,8 @@ export function getAuth(authSetting: object): IUserInfoAction {
     }
 }
 
+
+// 获取登录code
 export function login(code: string): IUserInfoAction {
     return {
         type: LOG_IN,
@@ -26,6 +29,7 @@ export function login(code: string): IUserInfoAction {
     }
 }
 
+// 微信登录获取用户信息
 export function getWechatInfo(wechatInfo: object): IUserInfoAction {
     return {
         type: GET_WECHAT_INFO,
@@ -35,6 +39,7 @@ export function getWechatInfo(wechatInfo: object): IUserInfoAction {
     }
 }
 
+// 服务器登录获取信息
 export function getUserInfo(userInfo: object): IUserInfoAction {
     return {
         type: GET_USER_INFO,

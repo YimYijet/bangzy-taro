@@ -7,5 +7,7 @@ export type ILocation = {
     // 当前位置
     curLocation: {}
     // 位置列表
-    locationList:  location[]
+    locationList: location[]
+    // 显示授权
+    isOpened: boolean
 }

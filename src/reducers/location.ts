@@ -1,4 +1,4 @@
-import { GET_CUR_LOCATION, GET_LOCATION_LIST } from '../constants/location'
+import { GET_CUR_LOCATION, GET_LOCATION_LIST, SET_OPENED } from '../constants/location'
 import { ILocation } from '../types/location'
 
 const INITIAL_STATE: ILocation = {
@@ -8,7 +8,8 @@ const INITIAL_STATE: ILocation = {
             name: '南京',
             code: '001'
         }
-    ]
+    ],
+    isOpened: false,
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -22,6 +23,11 @@ export default function(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 locationList: action.data.locationList
+            }
+        case SET_OPENED:
+            return {
+                ...state,
+                isOpened: action.data.isOpened
             }
         default:
             return state

@@ -1,4 +1,4 @@
-import { GET_CUR_LOCATION, GET_LOCATION_LIST } from '../constants/location'
+import { GET_CUR_LOCATION, GET_LOCATION_LIST, SET_OPENED } from '../constants/location'
 import { ILocation, location } from '../types/location'
 import { getLocationList } from '../services/location'
 
@@ -8,6 +8,7 @@ export interface ILocationAction {
     code?: number
 }
 
+// 获取城市列表
 export function getLocationListAction(list: location[]): ILocationAction {
     return {
         type: GET_LOCATION_LIST,
@@ -17,7 +18,8 @@ export function getLocationListAction(list: location[]): ILocationAction {
     }
 }
 
-export function getCurLocation(location: object):ILocationAction {
+// 获取当前位置
+export function getCurLocation(location: object): ILocationAction {
     return {
         type: GET_CUR_LOCATION,
         data: {
@@ -26,7 +28,17 @@ export function getCurLocation(location: object):ILocationAction {
     }
 }
 
-// 异步获取位置列表
+// 设置授权弹窗
+export function setOpened(isOpened: boolean): ILocationAction {
+    return {
+        type: SET_OPENED,
+        data: {
+            isOpened: isOpened
+        } as ILocation,
+    }
+}
+
+// 异步获取城市列表
 export function asyncGetLocationList(): any {
     return (dispatch, getState) => {
         getLocationList().then(res => {

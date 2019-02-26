@@ -6,9 +6,10 @@ import { Provider } from '@tarojs/redux'
 // import User from './pages/user'
 
 import configStore from './store'
+import { qqmapsdk } from './lib'
 
 import { getAuth, getWechatInfo } from './actions/userInfo' 
-import { getCurLocation } from './actions/location'
+import { getCurLocation, setOpened } from './actions/location'
 
 import './app.scss'
 // 导入taro-ui flex样式
@@ -82,14 +83,22 @@ class App extends Component {
             const user = await Taro.getUserInfo()
             store.dispatch(getWechatInfo(user.userInfo))
         }
+        // 授权获取位置信息
         if (auth.authSetting['scope.userLocation']) {
             const location = await Taro.getLocation()
-            console.log(location)
             store.dispatch(getCurLocation(location))
+            console.log(location)
+            qqmapsdk.reverseGeocoder({
+                location: {
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                },
+                success: function(res) {
+                    console.log(res)
+                }
+            }) 
         } else {
-            console.log(await Taro.openSetting({
-                scope: 'scope.userLocation'
-            }))
+            store.dispatch(setOpened(true))
         }
     }
 

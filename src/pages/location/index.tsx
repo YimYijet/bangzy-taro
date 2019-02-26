@@ -1,10 +1,13 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Map, Text } from '@tarojs/components'
-import { AtSearchBar, AtFloatLayout } from 'taro-ui'
+import { View, Map, Text, Button } from '@tarojs/components'
+import { AtSearchBar, AtFloatLayout, AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
-// import { getUserInfo, getWechatInfo } from '../../actions/userInfo'
+import { getCurLocation, setOpened } from '../../actions/location'
+import { getAuth } from '../../actions/userInfo'
+
+import { qqmapsdk } from '../../lib'
 
 import './index.scss'
 
@@ -13,11 +16,19 @@ import locationPoint from '../../assets/icon/location-point.png'
 import './detail/'
 
 type PageStateProps = {
-
+    user: {
+        authSetting: {}
+    },
+    location: {
+        isOpened: boolean
+        curLocation: {}
+    }
 }
 
 type PageDispatchProps = {
-
+    getCurLocation: (curLocation) => any
+    getAuth: (wechatInfo) => any
+    setOpened: (isOpened) => any
 }
 
 type PageOwnProps = {}
@@ -32,8 +43,19 @@ interface Location {
     props: IProps
 }
 
-@connect(() => ({}), (dispatch) => ({
-
+@connect(({ user, location }: PageStateProps) => ({
+    user,
+    location
+}), (dispatch) => ({
+    getCurLocation(curLocation) {
+        dispatch(getCurLocation(curLocation))
+    },
+    getAuth(wechatInfo) {
+        dispatch(getAuth(wechatInfo))
+    },
+    setOpened(isOpened) {
+        dispatch(setOpened(isOpened))
+    },
 }))
 class Location extends Component {
     public config: Config = {
@@ -51,8 +73,6 @@ class Location extends Component {
 
     constructor(props) {
         super(props)
-        this.onChange.bind(this)
-        this.handleSearch.bind(this)
     }
 
     public handleSearch(e) {
@@ -72,16 +92,36 @@ class Location extends Component {
         })
     }
 
+    public getCurLocation(e) {
+        this.props.getAuth(e.detail.authSetting)
+        this.props.setOpened(false)
+    }
+
+    public async componentWillReceiveProps() {
+        if (this.props.user.authSetting['scope.userLocation'] && !Object.keys(this.props.location.curLocation).length) {
+            const location = await Taro.getLocation()
+            this.props.getCurLocation(location)
+            qqmapsdk.reverseGeocoder({
+                location: location || '',
+                success: function(res) {
+                    console.log(res)
+                }
+            }) 
+        }
+    }
+
     public render() {
-        const { value } = this.state
+        const { value } = this.state, { location: {
+            isOpened
+        } } = this.props
         return (
             <View>
                 <View>
                     <AtSearchBar
                         placeholder="搜索咨询地点"
                         value={value}
-                        onChange={this.onChange}
-                        onActionClick={this.handleSearch}
+                        onChange={this.onChange.bind(this)}
+                        onActionClick={this.handleSearch.bind(this)}
                     />
                 </View>
                 <Map 
@@ -112,6 +152,18 @@ class Location extends Component {
                     onCalloutTap={this.handleTap.bind(this)}
                 >
                 </Map>
+                <AtModal isOpened={isOpened}>
+                    <AtModalHeader>授权提醒</AtModalHeader>
+                    <AtModalContent>
+                        需要获取您的地理位置，请确认授权
+                    </AtModalContent>
+                    <AtModalAction>
+                        <Button>取消</Button>
+                        <Button 
+                            openType="openSetting" 
+                            onOpenSetting={this.getCurLocation.bind(this)}>确定</Button>
+                    </AtModalAction>
+                </AtModal>
             </View>
         )
     }

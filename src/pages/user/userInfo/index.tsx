@@ -9,7 +9,6 @@ import { getUserInfo, getWechatInfo } from '../../../../actions/userInfo'
 import './index.scss'
 // 导入taro-ui flex样式
 import 'taro-ui/dist/weapp/css/index.css'
-import userInfo from '../../../../reducers/userInfo';
 
 type PageStateProps = {
     user: {
@@ -36,7 +35,7 @@ type PageStateProps = {
 }
 
 type PageDispatchProps = {
-    getWechat: (wechatInfo) => any
+    getWechatInfo: (wechatInfo) => any
 }
 
 type PageOwnProps = {
@@ -57,7 +56,7 @@ interface User {
 @connect(({ user }: PageStateProps) => ({
     user
 }), (dispatch) => ({
-    getWechat(wechatInfo) {
+    getWechatInfo(wechatInfo) {
         dispatch(getWechatInfo(wechatInfo))
     }
 }))
@@ -70,11 +69,10 @@ class User extends Component {
 
     public constructor(props) {
         super(props)
-        this.getUserInfo.bind(this)
     }
 
     public getUserInfo(e) {
-        this.props.getWechat(e.detail.userInfo)
+        this.props.getWechatInfo(e.detail.userInfo)
     }
 
     public render() {
@@ -100,7 +98,7 @@ class User extends Component {
                         <AtButton
                             type='primary' 
                             openType="getUserInfo" 
-                            onGetUserInfo={this.getUserInfo}>微信 登录
+                            onGetUserInfo={this.getUserInfo.bind(this)}>微信 登录
                         </AtButton>
                     </View>
                 </View>)

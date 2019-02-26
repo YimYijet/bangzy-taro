@@ -4,7 +4,7 @@ import { View, ScrollView, Text } from '@tarojs/components'
 import { AtList, AtListItem } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
-import UserInfo from './components/userInfo'
+import UserInfo from './userInfo'
 
 // import { getUserInfo, getWechatInfo } from '../../actions/userInfo'
 
@@ -67,7 +67,7 @@ class User extends Component {
                     <UserInfo link="../index/index"></UserInfo>
                 </View>
                 <Text>\n</Text>
-                <AtList>
+                {/* <AtList>
                     <AtListItem
                         title="我的钱包"
                         extraText="充值"
@@ -92,23 +92,22 @@ class User extends Component {
                             value: "idcard",
                         }}
                     />
-                </AtList>
-                <Text>\n</Text>
+                </AtList> */}
                 <AtList>
                     <AtListItem
-                        title="我的预约"
+                        title="我的咨询"
                         iconInfo={{
                             prefixClass: 'icon',
                             value: "calendar-check",
                         }}
                     />
-                    <AtListItem
+                    {/* <AtListItem
                         title="我的评价"
                         iconInfo={{
                             prefixClass: 'icon',
                             value: "solution",
                         }}
-                    />
+                    /> */}
                 </AtList>
                 <Text>\n</Text>
                 <AtList>
