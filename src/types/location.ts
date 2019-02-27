@@ -6,6 +6,8 @@ export type location = {
 export type ILocation = {
     // 当前位置
     curLocation: {}
+    // 当前城市
+    curCity: {}
     // 位置列表
     locationList: location[]
     // 显示授权

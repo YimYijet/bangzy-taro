@@ -36,12 +36,10 @@ interface LocationDetail {
 class LocationDetail extends Component{
 
     public config: Config = {
-        window: {
-            backgroundColor: "#eee"
-          },
-          navigationBarTitleText: "附近",
-          navigationBarTextStyle: "white",
-          navigationBarBackgroundColor: '#353535',
+        backgroundColor: "#eee",
+        navigationBarTitleText: "附近",
+        navigationBarTextStyle: "white",
+        navigationBarBackgroundColor: '#353535',
     }
 
     public state: PageState = {

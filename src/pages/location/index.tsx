@@ -20,7 +20,6 @@ type PageStateProps = {
         authSetting: {}
     },
     location: {
-        isOpened: boolean
         curLocation: {}
     }
 }
@@ -28,13 +27,13 @@ type PageStateProps = {
 type PageDispatchProps = {
     getCurLocation: (curLocation) => any
     getAuth: (wechatInfo) => any
-    setOpened: (isOpened) => any
 }
 
 type PageOwnProps = {}
 
 type PageState = {
     value: string
+    isOpened: boolean
 }
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
@@ -43,9 +42,20 @@ interface Location {
     props: IProps
 }
 
+async function getLocation(self) {
+    const location = await Taro.getLocation()
+    self.props.getCurLocation(location)
+    qqmapsdk.reverseGeocoder({
+        location: location || '',
+        success: function(res) {
+            console.log(res)
+        }
+    }) 
+}
+
 @connect(({ user, location }: PageStateProps) => ({
     user,
-    location
+    location,
 }), (dispatch) => ({
     getCurLocation(curLocation) {
         dispatch(getCurLocation(curLocation))
@@ -53,22 +63,18 @@ interface Location {
     getAuth(wechatInfo) {
         dispatch(getAuth(wechatInfo))
     },
-    setOpened(isOpened) {
-        dispatch(setOpened(isOpened))
-    },
 }))
 class Location extends Component {
     public config: Config = {
-        window: {
-            backgroundColor: "#eee"
-          },
-          navigationBarTitleText: "附近",
-          navigationBarTextStyle: "white",
-          navigationBarBackgroundColor: '#353535',
+        backgroundColor: "#eee",
+        navigationBarTitleText: "附近",
+        navigationBarTextStyle: "white",
+        navigationBarBackgroundColor: '#353535',
     }
 
     public state: PageState = {
         value: '',
+        isOpened: false,
     }
 
     constructor(props) {
@@ -77,6 +83,9 @@ class Location extends Component {
 
     public handleSearch(e) {
         console.log(e)
+        this.setState({
+            isOpened: true
+        })
     }
 
     public onChange(value) {
@@ -94,26 +103,42 @@ class Location extends Component {
 
     public getCurLocation(e) {
         this.props.getAuth(e.detail.authSetting)
-        this.props.setOpened(false)
+        this.setState({
+            isOpened: false
+        })
     }
 
-    public async componentWillReceiveProps() {
-        if (this.props.user.authSetting['scope.userLocation'] && !Object.keys(this.props.location.curLocation).length) {
-            const location = await Taro.getLocation()
-            this.props.getCurLocation(location)
-            qqmapsdk.reverseGeocoder({
-                location: location || '',
-                success: function(res) {
-                    console.log(res)
-                }
-            }) 
+    public componentWillMount() {
+        if (this.props.user.authSetting['scope.userLocation']) {
+            getLocation(this)
+        } else {
+            this.setState({
+                isOpened: true
+            })
         }
     }
 
+    public componentWillReceiveProps() {
+        if (this.props.user.authSetting['scope.userLocation'] && !Object.keys(this.props.location.curLocation).length) {
+            getLocation(this)
+        }
+    }
+
+    public componentWillUpdate() {
+        console.log(this.state.isOpened)
+    }
+
+    public componentDidShow() {
+        console.log('hi')
+    }
+
+    public componentDidHide() {
+        console.log('bye')
+    }
+
     public render() {
-        const { value } = this.state, { location: {
-            isOpened
-        } } = this.props
+        const { value, isOpened } = this.state
+        console.log(isOpened)
         return (
             <View>
                 <View>
@@ -152,18 +177,6 @@ class Location extends Component {
                     onCalloutTap={this.handleTap.bind(this)}
                 >
                 </Map>
-                <AtModal isOpened={isOpened}>
-                    <AtModalHeader>授权提醒</AtModalHeader>
-                    <AtModalContent>
-                        需要获取您的地理位置，请确认授权
-                    </AtModalContent>
-                    <AtModalAction>
-                        <Button>取消</Button>
-                        <Button 
-                            openType="openSetting" 
-                            onOpenSetting={this.getCurLocation.bind(this)}>确定</Button>
-                    </AtModalAction>
-                </AtModal>
             </View>
         )
     }

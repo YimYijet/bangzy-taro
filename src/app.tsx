@@ -2,14 +2,11 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import '@tarojs/async-await'
 import { Provider } from '@tarojs/redux'
 
-// import Index from './pages/index'
-// import User from './pages/user'
-
 import configStore from './store'
-import { qqmapsdk } from './lib'
+import { reverseGeocoder } from './lib'
 
 import { getAuth, getWechatInfo } from './actions/userInfo' 
-import { getCurLocation, setOpened } from './actions/location'
+import { getCurLocation, getCurCity } from './actions/location'
 
 import './app.scss'
 // 导入taro-ui flex样式
@@ -75,39 +72,28 @@ class App extends Component {
     }
 
     public async componentWillMount() {
-        // 获取授权
-        const auth = await Taro.getSetting()
-        store.dispatch(getAuth(auth.authSetting))
-        // 授权通过获取微信用户信息
-        if (auth.authSetting['scope.userInfo']) {
-            const user = await Taro.getUserInfo()
-            store.dispatch(getWechatInfo(user.userInfo))
-        }
-        // 授权获取位置信息
-        if (auth.authSetting['scope.userLocation']) {
+        try {
+            // 获取授权
+            const auth = await Taro.getSetting()
+            store.dispatch(getAuth(auth.authSetting))
+            // 授权通过获取微信用户信息
+            if (auth.authSetting['scope.userInfo']) {
+                const user = await Taro.getUserInfo()
+                store.dispatch(getWechatInfo(user.userInfo))
+            }
+            // 授权获取位置信息
             const location = await Taro.getLocation()
             store.dispatch(getCurLocation(location))
-            console.log(location)
-            qqmapsdk.reverseGeocoder({
-                location: {
-                    latitude: location.latitude,
-                    longitude: location.longitude,
-                },
-                success: function(res) {
-                    console.log(res)
-                }
-            }) 
-        } else {
-            store.dispatch(setOpened(true))
+            const city = await reverseGeocoder(location)
+            store.dispatch(getCurCity(city))
+        } catch (error) {
+            console.log(error)
         }
     }
 
     public render() {
         return (
-            <Provider store={store}>
-                {/* <Index />
-                <User /> */}
-            </Provider>
+            <Provider store={store}></Provider>
         )
     }
 }

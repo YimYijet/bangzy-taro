@@ -1,4 +1,4 @@
-import { GET_CUR_LOCATION, GET_LOCATION_LIST, SET_OPENED } from '../constants/location'
+import { GET_CUR_LOCATION, GET_CUR_CITY, GET_LOCATION_LIST, SET_OPENED } from '../constants/location'
 import { ILocation, location } from '../types/location'
 import { getLocationList } from '../services/location'
 
@@ -24,6 +24,16 @@ export function getCurLocation(location: object): ILocationAction {
         type: GET_CUR_LOCATION,
         data: {
             curLocation: location
+        } as ILocation,
+    }
+}
+
+// 获取当前城市
+export function getCurCity(city: object): ILocationAction {
+    return {
+        type: GET_CUR_CITY,
+        data: {
+            curCity: city
         } as ILocation,
     }
 }
