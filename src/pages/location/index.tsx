@@ -1,17 +1,17 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Map, Text, Button } from '@tarojs/components'
-import { AtSearchBar, AtFloatLayout, AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
+import { AtSearchBar } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
-import { getCurLocation, setOpened } from '../../actions/location'
-import { getAuth } from '../../actions/userInfo'
+import { getCurLocation, setOpened } from '@/actions/location'
+import { getAuth } from '@/actions/userInfo'
 
-import { qqmapsdk } from '../../lib'
+import { qqmapsdk } from '@/lib'
 
 import './index.scss'
 
-import locationPoint from '../../assets/icon/location-point.png'
+import locationPoint from '@/assets/icon/location-point.png'
 
 import './detail/'
 
@@ -151,13 +151,14 @@ class Location extends Component {
                 </View>
                 <Map 
                     className="location-map" 
-                    show-compass
-                    longitude={116.46} 
-                    latitude={39.92}
+                    showLocation={true}
+                    longitude={120.63212} 
+                    latitude={31.26249}
+                    scale={18}
                     markers={[{
                         id: 0,
-                        longitude: 116.46,
-                        latitude: 39.92,
+                        longitude: 120.63,
+                        latitude: 31.26,
                         iconPath: locationPoint,
                         width: 24,
                         height: 24,

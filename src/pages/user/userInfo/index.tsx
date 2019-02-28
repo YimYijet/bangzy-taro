@@ -4,7 +4,7 @@ import { View, Navigator, Text } from '@tarojs/components'
 import { AtButton, AtAvatar, AtIcon } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
-import { getUserInfo, getWechatInfo } from '../../../actions/userInfo'
+import { getUserInfo, getWechatInfo } from '@/actions/userInfo'
 
 import './index.scss'
 // 导入taro-ui flex样式

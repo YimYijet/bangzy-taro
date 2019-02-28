@@ -1,5 +1,5 @@
-import { GET_AUTH, LOG_IN, GET_WECHAT_INFO, GET_USER_INFO } from '../constants/userInfo'
-import { IUserInfo } from '../types/userInfo'
+import { GET_AUTH, LOG_IN, GET_WECHAT_INFO, GET_USER_INFO } from '@/constants/userInfo'
+import { IUserInfo } from '@/types/userInfo'
 
 const INITIAL_STATE: IUserInfo = {
     authSetting: {},

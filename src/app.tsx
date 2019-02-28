@@ -82,7 +82,9 @@ class App extends Component {
                 store.dispatch(getWechatInfo(user.userInfo))
             }
             // 授权获取位置信息
-            const location = await Taro.getLocation()
+            const location = await Taro.getLocation({
+                type: 'gcj02'
+            })
             store.dispatch(getCurLocation(location))
             const city = await reverseGeocoder(location)
             store.dispatch(getCurCity(city))

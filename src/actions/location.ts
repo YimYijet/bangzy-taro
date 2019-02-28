@@ -1,6 +1,6 @@
-import { GET_CUR_LOCATION, GET_CUR_CITY, GET_LOCATION_LIST, SET_OPENED } from '../constants/location'
-import { ILocation, location } from '../types/location'
-import { getLocationList } from '../services/location'
+import { GET_CUR_LOCATION, GET_CUR_CITY, GET_LOCATION_LIST, SET_OPENED } from '@/constants/location'
+import { ILocation, location } from '@/types/location'
+import { getLocationList } from '@/services/location'
 
 export interface ILocationAction {
     type: string

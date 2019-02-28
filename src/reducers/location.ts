@@ -1,5 +1,5 @@
-import { GET_CUR_LOCATION, GET_CUR_CITY, GET_LOCATION_LIST, SET_OPENED } from '../constants/location'
-import { ILocation } from '../types/location'
+import { GET_CUR_LOCATION, GET_CUR_CITY, GET_LOCATION_LIST, SET_OPENED } from '@/constants/location'
+import { ILocation } from '@/types/location'
 
 const INITIAL_STATE: ILocation = {
     curLocation: {},

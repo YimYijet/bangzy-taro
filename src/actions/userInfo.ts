@@ -1,6 +1,6 @@
-import { GET_AUTH, LOG_IN, GET_WECHAT_INFO, GET_USER_INFO } from '../constants/userInfo'
-import { IUserInfo } from '../types/userInfo'
-import { getUser } from '../services/userInfo'
+import { GET_AUTH, LOG_IN, GET_WECHAT_INFO, GET_USER_INFO } from '@/constants/userInfo'
+import { IUserInfo } from '@/types/userInfo'
+import { getUser } from '@/services/userInfo'
 
 export interface IUserInfoAction {
     type: string

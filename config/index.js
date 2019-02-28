@@ -4,6 +4,9 @@ const config = {
   designWidth: 750,
   sourceRoot: 'src',
   outputRoot: 'dist',
+  alias: {
+    '@': './src',
+  },
   plugins: {
     babel: {
       sourceMap: true,

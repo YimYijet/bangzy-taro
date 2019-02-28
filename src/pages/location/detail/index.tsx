@@ -30,10 +30,10 @@ interface LocationDetail {
     props: IProps
 }
 
-@connect(() => ({}), (dispatch) => ({
-
-}))
-class LocationDetail extends Component{
+@connect(({ title }) => ({
+    title
+}), (dispatch) => ({}))
+class LocationDetail extends Component {
 
     public config: Config = {
         backgroundColor: "#eee",
