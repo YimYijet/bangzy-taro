@@ -1,27 +1,21 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Map, Text, Button } from '@tarojs/components'
+import { View, Text, Button } from '@tarojs/components'
 import { AtSearchBar } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
 import { getCurLocation, setOpened } from '@/actions/location'
 import { getAuth } from '@/actions/userInfo'
 
-import { qqmapsdk } from '@/lib'
 
 import './index.scss'
 
-import locationPoint from '@/assets/icon/location-point.png'
-
 import './detail/'
+import IMap from './map'
 
 type PageStateProps = {
-    user: {
-        authSetting: {}
-    },
-    location: {
-        curLocation: {}
-    }
+    authSetting: {}
+    curLocation: any
 }
 
 type PageDispatchProps = {
@@ -42,20 +36,9 @@ interface Location {
     props: IProps
 }
 
-async function getLocation(self) {
-    const location = await Taro.getLocation()
-    self.props.getCurLocation(location)
-    qqmapsdk.reverseGeocoder({
-        location: location || '',
-        success: function(res) {
-            console.log(res)
-        }
-    }) 
-}
-
-@connect(({ user, location }: PageStateProps) => ({
-    user,
-    location,
+@connect((state) => ({
+    authSetting: state.user.authSetting,
+    curLocation: state.location.curLocation,
 }), (dispatch) => ({
     getCurLocation(curLocation) {
         dispatch(getCurLocation(curLocation))
@@ -108,22 +91,6 @@ class Location extends Component {
         })
     }
 
-    public componentWillMount() {
-        if (this.props.user.authSetting['scope.userLocation']) {
-            getLocation(this)
-        } else {
-            this.setState({
-                isOpened: true
-            })
-        }
-    }
-
-    public componentWillReceiveProps() {
-        if (this.props.user.authSetting['scope.userLocation'] && !Object.keys(this.props.location.curLocation).length) {
-            getLocation(this)
-        }
-    }
-
     public componentWillUpdate() {
         console.log(this.state.isOpened)
     }
@@ -137,11 +104,15 @@ class Location extends Component {
     }
 
     public render() {
-        const { value, isOpened } = this.state
+        const { value, isOpened } = this.state, { curLocation } = this.props
         console.log(isOpened)
         return (
             <View>
-                <View>
+                <View className="loc-title">
+                    <View className="loc-city"></View>
+                    <View className="loc-weather"></View>
+                </View>
+                <View className="loc-search">
                     <AtSearchBar
                         placeholder="搜索咨询地点"
                         value={value}
@@ -149,35 +120,9 @@ class Location extends Component {
                         onActionClick={this.handleSearch.bind(this)}
                     />
                 </View>
-                <Map 
-                    className="location-map" 
-                    showLocation={true}
-                    longitude={120.63212} 
-                    latitude={31.26249}
-                    scale={18}
-                    markers={[{
-                        id: 0,
-                        longitude: 120.63,
-                        latitude: 31.26,
-                        iconPath: locationPoint,
-                        width: 24,
-                        height: 24,
-                        callout: {
-                            content: '宿迁中学咨询点',
-                            color: '#353535',
-                            fontSize: 13,
-                            borderRadius: 16,
-                            borderWidth: 1,
-                            borderColor: '#e6e6e6',
-                            bgColor: '#fff',
-                            padding: 9,
-                            display: 'ALWAYS',
-                            textAlign: 'center'
-                        }
-                    }]}
-                    onCalloutTap={this.handleTap.bind(this)}
-                >
-                </Map>
+                <View className="loc-map">
+                    <IMap></IMap>
+                </View>
             </View>
         )
     }

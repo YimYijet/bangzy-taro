@@ -1,8 +1,8 @@
 export type IUserInfo = {
     // 设置授权
     authSetting: {}
-    // 登录获取code，用于换openId, sessionKey, unionId
-    code: string
+    // 授权码
+    token: string
     // 微信用户信息
     wechatInfo: {
         // 昵称

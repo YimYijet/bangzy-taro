@@ -10,7 +10,6 @@ const INITIAL_STATE: ILocation = {
             code: '001'
         }
     ],
-    isOpened: false,
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -29,11 +28,6 @@ export default function(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 locationList: action.data.locationList
-            }
-        case SET_OPENED:
-            return {
-                ...state,
-                isOpened: action.data.isOpened
             }
         default:
             return state

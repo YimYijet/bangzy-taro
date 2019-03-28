@@ -1,0 +1,16 @@
+.map {
+    height: 100%;
+    width: 100%;
+    &-mask {
+        height: 100%;
+        width: 100%;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &-content {
+        height: calc(100vh - 200px);
+        width: 100vw;
+    }
+}

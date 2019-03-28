@@ -3,7 +3,7 @@ import { IUserInfo } from '@/types/userInfo'
 
 const INITIAL_STATE: IUserInfo = {
     authSetting: {},
-    code: '',
+    token: '',
     wechatInfo: {
         nickName: '',
         avatarUrl: '',

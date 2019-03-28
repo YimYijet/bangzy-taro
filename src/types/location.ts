@@ -10,6 +10,4 @@ export type ILocation = {
     curCity: {}
     // 位置列表
     locationList: location[]
-    // 显示授权
-    isOpened: boolean
 }

@@ -1,6 +1,12 @@
-.location {
+.loc {
+    &-title {
+        height: 120px;
+    }
+    &-city, &-weather {
+        width: 50%;
+    }
     &-map {
-        height: 100vh;
+        height: calc(100vh - 200px);
         width: 100vw;
     }
 }
